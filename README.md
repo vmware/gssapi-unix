@@ -20,8 +20,7 @@ Building gssapi-unix on Photon OS
 
 
 ### Install binaries
-  - make install
-
+    - make install
 
 ### Built Libaries 
 Currently following libaries will be built.
