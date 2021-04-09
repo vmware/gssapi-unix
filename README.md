@@ -22,8 +22,8 @@ Building gssapi-unix on Photon OS
 ### Install binaries
     - make install
 
-### Built Libaries 
-Currently following libaries will be built.
+### Built Libraries
+Currently following libraries will be built.
   1. libgssapi_unix_creds.so
   2. libgssapi_unix.so
  
