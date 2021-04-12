@@ -154,7 +154,7 @@ typedef struct {
         unsigned char     aes_encrypt_iv[AES_BLOCK_SIZE];
         unsigned char     aes_decrypt_iv[AES_BLOCK_SIZE];
 #endif
-        HMAC_CTX          hmac_ctx;
+        HMAC_CTX          *hmac_ctx;
         char              *unix_username; /* UNIX username */
         char              *upn_name;     /* Kerberos UPN Name */
         unsigned char     *srp_session_key;

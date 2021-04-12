@@ -99,24 +99,24 @@ srp_expand_session_key(
 
 static int
 srp_init_hmac(
-    HMAC_CTX *phctx,
+    HMAC_CTX **phctx,
     unsigned char *key,
     int key_len)
 {
     int sts = 0;
-    HMAC_CTX hctx;
+    HMAC_CTX *hctx;
     unsigned char md[40] = {0};
     unsigned int mdlen = 0;
 
-    memset(&hctx, 0, sizeof(hctx));
-    HMAC_CTX_init(&hctx);
-    sts = HMAC_Init_ex(&hctx, key, key_len, EVP_sha1(), NULL);
+    hctx = HMAC_CTX_new();
+    HMAC_CTX_reset(hctx);
+    sts = HMAC_Init_ex(hctx, key, key_len, EVP_sha1(), NULL);
     if (sts == 0)
     {
         return sts;
     }
-    HMAC_Update(&hctx, "", 0);
-    HMAC_Final(&hctx, md, &mdlen);
+    HMAC_Update(hctx, "", 0);
+    HMAC_Final(hctx, md, &mdlen);
 
     *phctx = hctx;
     return 0;
@@ -124,7 +124,7 @@ srp_init_hmac(
 
 static int
 srp_compute_hmac(
-    HMAC_CTX hctx,
+    HMAC_CTX *hctx,
     unsigned char *data,
     int data_len,
     unsigned char *md,
@@ -133,17 +133,17 @@ srp_compute_hmac(
     int sts = 0;
 
     /* These functions return 0 on error, 1 for success */
-    sts = HMAC_Init_ex(&hctx, NULL, 0, EVP_sha1(), NULL);
+    sts = HMAC_Init_ex(hctx, NULL, 0, EVP_sha1(), NULL);
     if (sts == 0)
     {
         return sts;
     }
-    sts = HMAC_Update(&hctx, data, data_len);
+    sts = HMAC_Update(hctx, data, data_len);
     if (sts == 0)
     {
         return sts;
     }
-    sts = HMAC_Final(&hctx, md, md_len);
+    sts = HMAC_Final(hctx, md, md_len);
     if (sts == 0)
     {
         return sts;

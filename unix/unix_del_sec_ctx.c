@@ -85,7 +85,11 @@ srp_gss_delete_sec_context(
         srp_ctx->krb5_ctx = NULL;
     }
 
-    HMAC_CTX_cleanup(&srp_ctx->hmac_ctx);
+    if (srp_ctx->hmac_ctx != NULL)
+    {
+        HMAC_CTX_reset(srp_ctx->hmac_ctx);
+        HMAC_CTX_free(srp_ctx->hmac_ctx);
+    }
 #ifdef SRP_FIPS_ENABLED
     if (srp_ctx->evp_encrypt_ctx)
     {
