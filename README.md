@@ -1,5 +1,7 @@
 # GSSAPI-Unix
-GSSAPI-Unix (Generic Security Service Application Programming Interface) is a function interface that provides security services for applications in a mechanism-independent way. This allows different security mechanisms to be used via one standardized API.
+GSSAPI (Generic Security Service Application Programming Interface) is a function interface that provides security services for applications in a mechanism-independent way. This allows different security mechanisms to be used via one standardized API.
+ 
+GSSAPI-Unix provides a GSSAPI mechanism to authenticate security principals defined in /etc/passwd on UNIX and LINUX systems.
 
 
 ### Dependencies
